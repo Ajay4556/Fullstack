@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/header'); -%>
+    <body>
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: black">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Open Appointments</h1>
+                            <h2 class="subheading">Select a date </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+            <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div>
+                       <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th><th scope="col">Test</th><th scope="col">Result</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+               
+                          <%for(let i=0; i< examinerInfoData.length; i++){ %>
+                            <tr>
+                              <td><%= examinerInfoData[i].firstname%><%= examinerInfoData[i].lastname%></td>
+                              <td><%= examinerInfoData[i].testtype%></td>
+                              <%if(examinerInfoData[i].ispass == true){ %><td>Pass</td>
+                              <%}else{%><td>Fail</td><% } %>
+                            </tr>
+                           <% } %>
+                          
+                        </tbody>
+                      </table>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="my-5">
+                            <form action="/appointment/fetched_slots" method="POST">
+                                <div class="form-floating">
+                                    <input class="form-control" name="date" type="date" id="selected-date">
+                                    <label for="date" name="dateSelector">Select a date</label>
+                                </div>            
+                                <br>
+                                <button class="btn btn-primary text-uppercase" id="saveAppointments"  type="submit">Fetch available time slots</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('layouts/footer'); -%>
+        <%- include('layouts/scripts'); -%>
+    </body>
+</html>
